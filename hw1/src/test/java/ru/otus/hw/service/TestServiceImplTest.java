@@ -1,4 +1,4 @@
-package ru.otus.hw;
+package ru.otus.hw.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,13 +6,14 @@ import org.mockito.ArgumentCaptor;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
-import ru.otus.hw.service.IOService;
-import ru.otus.hw.service.TestServiceImpl;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 class TestServiceImplTest {
@@ -22,7 +23,7 @@ class TestServiceImplTest {
     private TestServiceImpl testService;
     private List<Answer> answers;
     private String question;
-    List<Question> questions;
+    private List<Question> questions;
 
     @BeforeEach
     void setUp() {

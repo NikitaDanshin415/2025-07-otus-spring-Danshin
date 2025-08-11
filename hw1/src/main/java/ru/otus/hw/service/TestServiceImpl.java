@@ -3,6 +3,7 @@ package ru.otus.hw.service;
 import lombok.RequiredArgsConstructor;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.exceptions.QuestionReadException;
 
 import java.util.List;
 
@@ -16,15 +17,29 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public void executeTest() {
-        ioService.printLine("");
-        ioService.printFormattedLine("Please answer the questions below%n");
+        try {
+            ioService.printLine("");
+            ioService.printFormattedLine("Please answer the questions below%n");
 
-        List<Question> questions = questionDao.findAll();
+            List<Question> questions = questionDao.findAll();
+            printQuestionsWithAnswers(questions);
+        } catch (QuestionReadException e) {
+            ioService.printLine(e.getMessage());
+        }
+    }
+
+    private void printQuestionsWithAnswers(List<Question> questions) {
         questions.forEach(question -> {
-            ioService.printFormattedLine("%s", question.text());
-
-            question.answers()
-                    .forEach(answer -> ioService.printFormattedLine("    %s", answer.text()));
+            printQuestion(question);
+            printAnswers(question);
         });
+    }
+
+    private void printQuestion(Question question) {
+        ioService.printFormattedLine("%s", question.text());
+    }
+
+    private void printAnswers(Question question) {
+        question.answers().forEach(answer -> ioService.printFormattedLine("    %s", answer.text()));
     }
 }
