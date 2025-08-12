@@ -17,13 +17,13 @@ public class CsvQuestionDao implements QuestionDao {
 
     @Override
     public List<Question> findAll() {
-        var is = getClass().getClassLoader().getResourceAsStream(fileNameProvider.getTestFileName());
-        if (is == null) {
+        var csvInputStream = getClass().getClassLoader().getResourceAsStream(fileNameProvider.getTestFileName());
+        if (csvInputStream == null) {
             throw new QuestionReadException("File not found:" + fileNameProvider.getTestFileName());
         }
 
-        try (is) {
-            Reader reader = new InputStreamReader(is);
+        try (csvInputStream) {
+            Reader reader = new InputStreamReader(csvInputStream);
             List<QuestionDto> questionDtos = new CsvToBeanBuilder<QuestionDto>(reader)
                     .withType(QuestionDto.class)
                     .withSkipLines(1)
@@ -36,7 +36,7 @@ public class CsvQuestionDao implements QuestionDao {
                     .collect(Collectors.toList());
 
         } catch (Exception e) {
-            throw new QuestionReadException("Error when reading the CSV file. Please contact the developer.");
+            throw new QuestionReadException("Error when reading the CSV file:", e);
         }
     }
 }
