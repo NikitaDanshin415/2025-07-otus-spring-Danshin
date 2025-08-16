@@ -37,7 +37,7 @@ public class TestServiceImpl implements TestService {
                     String.format("Please, enter a number from %s to %s.", 1, countOfAnswers),
                     String.format("Input error. You need to enter value from %s to %s.", 1, countOfAnswers)
             );
-            boolean isAnswerValid = answer == numberOfValidAnswer + 1; // Задать вопрос, получить ответ
+            boolean isAnswerValid = answer == numberOfValidAnswer + 1;
             testResult.applyAnswer(question, isAnswerValid);
         }
         return testResult;
