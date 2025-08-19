@@ -26,18 +26,8 @@ public class TestServiceImpl implements TestService {
         var testResult = new TestResult(student);
 
         for (var question : questions) {
-            int countOfAnswers = getCountOfAnswers(question);
-            int numberOfValidAnswer = getNumberOfCorrectAnswer(question);
-
             printQuestionWithAnswers(question);
-
-            int answer = ioService.readIntForRangeWithPrompt(
-                    1,
-                    countOfAnswers,
-                    String.format("Please, enter a number from %s to %s.", 1, countOfAnswers),
-                    String.format("Input error. You need to enter value from %s to %s.", 1, countOfAnswers)
-            );
-            boolean isAnswerValid = answer == numberOfValidAnswer + 1;
+            boolean isAnswerValid = getAndValidateUserAnswer(question);
             testResult.applyAnswer(question, isAnswerValid);
         }
         return testResult;
@@ -69,5 +59,22 @@ public class TestServiceImpl implements TestService {
                 .forEach(i -> ioService.printFormattedLine("    %d) %s",
                         i + 1, question.answers().get(i).text()));
     }
-}
 
+    private int getUserAnswer(Question question) {
+        int countOfAnswers = getCountOfAnswers(question);
+
+        return ioService.readIntForRangeWithPrompt(
+                1,
+                countOfAnswers,
+                String.format("Please, enter a number from %s to %s.", 1, countOfAnswers),
+                String.format("Input error. You need to enter value from %s to %s.", 1, countOfAnswers)
+        );
+    }
+
+    private boolean getAndValidateUserAnswer(Question question) {
+        int numberOfValidAnswer = getNumberOfCorrectAnswer(question) + 1;
+        int userAnswer = getUserAnswer(question);
+
+        return numberOfValidAnswer == userAnswer;
+    }
+}
