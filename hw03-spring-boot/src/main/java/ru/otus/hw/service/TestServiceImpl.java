@@ -66,15 +66,11 @@ public class TestServiceImpl implements TestService {
     private int getUserAnswer(Question question) {
         int countOfAnswers = getCountOfAnswers(question);
 
-        return ioService.readIntForRangeWithPrompt(
+        return ioService.readIntForRangeWithPromptLocalized(
                 1,
                 countOfAnswers,
-                String.format(
-                        ioService.getMessage("TestService.question.enter.answer.number", 1, countOfAnswers)
-                ),
-                String.format(
-                        ioService.getMessage("TestService.question.enter.answer.number.error", 1, countOfAnswers)
-                )
+                ioService.getMessage("TestService.question.enter.answer.number",1, countOfAnswers),
+                ioService.getMessage("TestService.question.enter.answer.number.error",1, countOfAnswers)
         );
     }
 
