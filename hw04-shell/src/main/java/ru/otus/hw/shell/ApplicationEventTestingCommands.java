@@ -13,7 +13,7 @@ import ru.otus.hw.security.LoginContext;
 
 @ShellComponent(value = "Application Testing Student Command")
 @RequiredArgsConstructor
-public class ApplicationEventCommands {
+public class ApplicationEventTestingCommands {
     private final LoginContext loginContext;
 
     private final StudentService studentService;
@@ -30,13 +30,13 @@ public class ApplicationEventCommands {
     }
 
     @ShellMethod(value = "Start testing", key = {"t", "test"})
-    @ShellMethodAvailability(value = "isStatTestingCommandAvailability")
+    @ShellMethodAvailability(value = "isStartTestingCommandAvailable")
     public void startTesting() {
         var student = loginContext.getStudent();
         testRunnerService.run(student);
     }
 
-    private Availability isStatTestingCommandAvailable() {
+    private Availability isStartTestingCommandAvailable() {
         return loginContext.isStudentLoggedIn()
                 ? Availability.available()
                 : Availability.unavailable(ioService.getMessage("LoginContext.login.fail"));

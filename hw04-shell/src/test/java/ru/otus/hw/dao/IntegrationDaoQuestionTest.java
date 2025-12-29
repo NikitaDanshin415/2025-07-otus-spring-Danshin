@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = {CsvQuestionDao.class})
-@ActiveProfiles("test")
 class IntegrationDaoQuestionTest {
 
     @MockitoBean
