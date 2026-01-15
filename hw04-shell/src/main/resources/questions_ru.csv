@@ -1,0 +1,6 @@
+# Добавить сюда своих вопросов. Эту строку надо пропустить при настройке CsvToBean (withSkipLines)
+Есть ли жизнь на Марсе?;Наука пока этого не знает%true|Разумеется. Красные НЛО с Марса, а зелёные — с Венеры%false|Абсолютно нет%false
+Как загружать ресурсы из jar в Java?;ClassLoader#getResourceAsStream или ClassPathResource#getInputStream%true|ClassLoader#getResource#getFile + FileReader%false|Wingardium Leviosa%false
+Какой вариант является хорошим способом обработки исключения?;@SneakyThrow%false|e.printStackTrace()%false|Перекинуть, обернув в бизнес-исключение (например, QuestionReadException)%true|Игнорировать исключение%false
+Что делает ключевое слово volatile?;Гарантирует видимость изменений%true|Ускоряет доступ к памяти%false|Автоматически синхронизирует методы%false|Запускает сборщик мусора%false
+Какой принцип относится к SOLID?;Сокрытие реализации%false|Принцип подстановки Барбары Лисков (LSP)%true|Инкапсуляция данных%false|Императивное наследование%false
